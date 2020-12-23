@@ -25,7 +25,7 @@ H5P.DragNBarElement = (function ($, ContextMenu, EventDispatcher) {
     this.dnb = dragNBar;
     this.options = options || {};
     if (!this.options.disableContextMenu) {
-      this.contextMenu = new ContextMenu(this.dnb.$dialogContainer, this, this.options.hasCoordinates, this.options.disableResize, this.options.disableCopy, this.options.directionLock);
+      this.contextMenu = new ContextMenu(this.dnb.$dialogContainer, this, this.options.hasCoordinates, this.options.disableResize, this.options.disableCopy, this.options.directionLock, this.options.disableRotate);
     }
     this.focused = false;
 
@@ -36,6 +36,9 @@ H5P.DragNBarElement = (function ($, ContextMenu, EventDispatcher) {
     else {
       this.$element = this.options.element;
     }
+
+    // Initialize
+    this.setSize();
 
     // Let dnb know element has been pressed
     if (this.$element) {
@@ -133,6 +136,44 @@ H5P.DragNBarElement = (function ($, ContextMenu, EventDispatcher) {
   };
 
   /**
+   * Update rotation in context menu to current rotation.
+   *
+   * @param {number} angle Angle.
+   * @param {boolean} nofit If true, only update context menu, but don't fit.
+   */
+  DragNBarElement.prototype.updateRotation = function (angle, nofit) {
+    if (typeof angle === 'number' && !nofit) {
+      this.$element.css({
+        'transform': ''
+      });
+
+      // Update element rotation
+      const $outer = this.$element.children().first();
+
+      /*
+       * Only rotating instance outer, not the overlay element with sizing
+       */
+      let matrixComponents = this.dnb.getMatrixComponents($outer);
+      $outer.css('transform', `rotate(${angle}deg) scale(${matrixComponents.scale.x}, ${matrixComponents.scale.y})`);
+
+      // Make $element fit its child that can be larger/smaller due to rotation
+      this.dnb.fitToChild(this.$element);
+
+      // Editors may add outline to $outer that will be streched due to scaling
+      matrixComponents = this.dnb.getMatrixComponents($outer);
+      const scaleDistortion = matrixComponents.scale.x < 0.3 || matrixComponents.scale.x > 1.7 || matrixComponents.scale.y < 0.3 || matrixComponents.scale.y > 1.7;
+      $outer.toggleClass('h5p-scale-distortion', scaleDistortion);
+
+      this.dnb.updateCoordinates();
+      this.dnb.updateDimensions();
+    }
+
+    if (this.contextMenu) {
+      this.contextMenu.updateRotation(angle);
+    }
+  };
+
+  /**
    * Float context menu left if width exceeds parent container.
    *
    * @param {Number} [left] Left position of context menu.
@@ -207,6 +248,28 @@ H5P.DragNBarElement = (function ($, ContextMenu, EventDispatcher) {
     this.$element.detach();
     this.hideContextMenu();
   };
+
+  /**
+   * Set size. Used to circumvent numerical unprecision in browser.
+   * @param {object} size Size.
+   * @param {number} size.height Height.
+   * @param {number} size.width Width.
+   */
+  DragNBarElement.prototype.setSize = function (size) {
+    if (!this.size) {
+      size = this.dnb.getHullSize(this.$element);
+    }
+
+    this.size = size;
+  }
+
+  /**
+   * Get size. Used to circumvent numerical unprecision in browser.
+   * @return {object} Size. Height and width.
+   */
+  DragNBarElement.prototype.getSize = function () {
+    return this.size;
+  }
 
   return DragNBarElement;
 

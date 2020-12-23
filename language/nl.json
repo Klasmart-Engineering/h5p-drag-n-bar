@@ -8,6 +8,7 @@
     "unableToPaste":"Kan dit object niet plakken. Helaas, het object dat je probeert te plakken wordt niet ondersteund door dit inhoudstype of versie.",
     "sizeLabel":"Maat",
     "positionLabel":"Positie",
+    "rotationLabel": "Rotation",    
     "heightLabel":"Hoogte",
     "widthLabel":"Breedte",
     "copyLabel": "Kopiëren",
