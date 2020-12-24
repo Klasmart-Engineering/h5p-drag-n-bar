@@ -861,7 +861,7 @@ H5P.DragNBar.prototype.getElementSizeNPosition = function ($element) {
   // We include container inner size as well
   var containerSize = window.getComputedStyle(this.$container[0]);
 
-  const transform = this.getMatrixComponents($element.children().first());
+  const transform = this.getCSSTransformValues($element.children().first());
 
   // Start preparing return value
   var sizeNPosition = {
@@ -1237,7 +1237,7 @@ H5P.DragNBar.fitElementInside = function (sizeNPosition) {
  * @param {H5P.jQuery} $element DOM element.
  * @return {object} Components: angle, rotation, scale, skew, translation.
  */
-H5P.DragNBar.prototype.getMatrixComponents = function ($element) {
+H5P.DragNBar.prototype.getCSSTransformValues = function ($element) {
   const matrix = $element.css('transform')
 
   let matrixValues
@@ -1362,9 +1362,9 @@ H5P.DragNBar.prototype.fitToChild = function ($outer, useBrowserSize) {
   });
 
   // Compute simpler transform value
-  const innerMaxtrixComponents = this.getMatrixComponents($inner);
+  const innerTransformValues = this.getCSSTransformValues($inner);
   $inner.css({
-    transform: `rotate(${innerMaxtrixComponents.rotation}rad) scale(${innerMaxtrixComponents.scale.x}, ${innerMaxtrixComponents.scale.y})`
+    transform: `rotate(${innerTransformValues.rotation}rad) scale(${innerTransformValues.scale.x}, ${innerTransformValues.scale.y})`
   });
 
   // Update content (balance scaling and sizing of parent)
@@ -1385,11 +1385,13 @@ H5P.DragNBar.prototype.fitToChild = function ($outer, useBrowserSize) {
     });
 
     // Compute simpler transform value
-    const contentMaxtrixComponents = this.getMatrixComponents($content);
+    const contentTransformValues = this.getCSSTransformValues($content);
     $content.css({
-      transform: `rotate(${contentMaxtrixComponents.rotation}rad) scale(${contentMaxtrixComponents.scale.x}, ${contentMaxtrixComponents.scale.y})`
+      transform: `rotate(${contentTransformValues.rotation}rad) scale(${contentTransformValues.scale.x}, ${contentTransformValues.scale.y})`
     });
   }
+
+  this.dnr.trigger('updatedTransform', innerTransformValues);
 }
 
 /**
