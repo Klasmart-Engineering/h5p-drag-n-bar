@@ -116,7 +116,7 @@ H5P.DragNBar.prototype.initEditor = function () {
   this.dnr.on('stoppedResizing', function () {
     that.pressed = true;
 
-    that.fitToChild(that.$element, true);
+    that.fitToChild(that.$element);
 
     var offset = that.$element.offset();
     var position = that.$element.position();
@@ -1324,6 +1324,8 @@ H5P.DragNBar.prototype.fitToChild = function ($outer, useBrowserSize) {
   if (!this.focusedElement) {
     return;
   }
+
+  useBrowserSize = useBrowserSize || false;
 
   const $inner = $outer.children().first();
 
