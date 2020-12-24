@@ -153,15 +153,15 @@ H5P.DragNBarElement = (function ($, ContextMenu, EventDispatcher) {
       /*
        * Only rotating instance outer, not the overlay element with sizing
        */
-      let matrixComponents = this.dnb.getMatrixComponents($outer);
-      $outer.css('transform', `rotate(${angle}deg) scale(${matrixComponents.scale.x}, ${matrixComponents.scale.y})`);
+      let transformValues = this.dnb.getCSSTransformValues($outer);
+      $outer.css('transform', `rotate(${angle}deg) scale(${transformValues.scale.x}, ${transformValues.scale.y})`);
 
       // Make $element fit its child that can be larger/smaller due to rotation
       this.dnb.fitToChild(this.$element);
 
       // Editors may add outline to $outer that will be streched due to scaling
-      matrixComponents = this.dnb.getMatrixComponents($outer);
-      const scaleDistortion = matrixComponents.scale.x < 0.3 || matrixComponents.scale.x > 1.7 || matrixComponents.scale.y < 0.3 || matrixComponents.scale.y > 1.7;
+      transformValues = this.dnb.getCSSTransformValues($outer);
+      const scaleDistortion = transformValues.scale.x < 0.3 || transformValues.scale.x > 1.7 || transformValues.scale.y < 0.3 || transformValues.scale.y > 1.7;
       $outer.toggleClass('h5p-scale-distortion', scaleDistortion);
 
       this.dnb.updateCoordinates();

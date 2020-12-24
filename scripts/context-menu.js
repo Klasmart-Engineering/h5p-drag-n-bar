@@ -347,9 +347,9 @@ H5P.DragNBarContextMenu = (function ($, EventDispatcher) {
 
     if (typeof angle !== 'number') {
       const $element = this.dnbElement.getElement();
-      const $outer = $element.children('.h5p-element-outer');
+      const $outer = $element.children().first();
 
-      angle = this.dnb.getMatrixComponents($outer).angle;
+      angle = this.dnb.getCSSTransformValues($outer).angle;
     }
 
     // Only use degrees of 0-359
