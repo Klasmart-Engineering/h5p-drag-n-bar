@@ -256,11 +256,16 @@ H5P.DragNBarElement = (function ($, ContextMenu, EventDispatcher) {
    * @param {number} size.width Width.
    */
   DragNBarElement.prototype.setSize = function (size) {
-    if (!this.size) {
-      size = this.dnb.getHullSize(this.$element);
+    if (!this.size || !size) {
+      // Prevent width/height = 0 if initializing when element not visible
+      if ($(document).find(this.$element).length > 0) {
+        size = this.dnb.getHullSize(this.$element);
+      }
     }
 
-    this.size = size;
+    if (size) {
+      this.size = size;
+    }
   }
 
   /**
@@ -268,6 +273,10 @@ H5P.DragNBarElement = (function ($, ContextMenu, EventDispatcher) {
    * @return {object} Size. Height and width.
    */
   DragNBarElement.prototype.getSize = function () {
+    if (!this.size) {
+      this.setSize();
+    }
+
     return this.size;
   }
 

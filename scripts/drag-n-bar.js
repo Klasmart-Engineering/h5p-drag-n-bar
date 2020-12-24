@@ -1321,6 +1321,10 @@ H5P.DragNBar.prototype.getMatrixComponents = function ($element) {
  * @param {boolean} useBrowserSize If true, will not use internal computed size but DOM size.
  */
 H5P.DragNBar.prototype.fitToChild = function ($outer, useBrowserSize) {
+  if (!this.focusedElement) {
+    return;
+  }
+
   const $inner = $outer.children().first();
 
   // Store initial sizes
