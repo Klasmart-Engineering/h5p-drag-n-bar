@@ -113,10 +113,10 @@ H5P.DragNBar.prototype.initEditor = function () {
   });
 
   // Set pressed to not lose focus at the end of resize
-  this.dnr.on('stoppedResizing', function () {
+  this.dnr.on('stoppedResizing', function (event) {
     that.pressed = true;
 
-    that.fitToChild(that.$element);
+    that.fitToChild(that.$element, event && event.data && event.data.useBrowserSize);
 
     var offset = that.$element.offset();
     var position = that.$element.position();
