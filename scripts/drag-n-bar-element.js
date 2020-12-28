@@ -157,7 +157,7 @@ H5P.DragNBarElement = (function ($, ContextMenu, EventDispatcher) {
       $outer.css('transform', `rotate(${angle}deg) scale(${transformValues.scale.x}, ${transformValues.scale.y})`);
 
       // Make $element fit its child that can be larger/smaller due to rotation
-      this.dnb.fitToChild(this.$element);
+      this.dnb.fitToChild(this.$element, false);
 
       // Editors may add outline to $outer that will be streched due to scaling
       transformValues = this.dnb.getCSSTransformValues($outer);

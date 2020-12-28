@@ -1318,14 +1318,14 @@ H5P.DragNBar.prototype.getCSSTransformValues = function ($element) {
  * uses 100% width and height of parent.
  *
  * @param {H5P.jQuery} $outer Parent element.
- * @param {boolean} useBrowserSize If true, will not use internal computed size but DOM size.
+ * @param {boolean} [useBrowserSize=true] If true, will not use internal computed size but DOM size.
  */
 H5P.DragNBar.prototype.fitToChild = function ($outer, useBrowserSize) {
   if (!this.focusedElement) {
     return;
   }
 
-  useBrowserSize = useBrowserSize || false;
+  useBrowserSize = (typeof useBrowserSize === 'boolean') ? useBrowserSize : true;
 
   const $inner = $outer.children().first();
 
