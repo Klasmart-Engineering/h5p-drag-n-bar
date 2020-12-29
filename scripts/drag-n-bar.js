@@ -1411,6 +1411,44 @@ H5P.DragNBar.prototype.getHullSize = function($element) {
 };
 
 /**
+ * Get current element's geometry.
+ * @return {object} Geometry.
+ */
+H5P.DragNBar.prototype.getCurrentGeometry = function() {
+  const geometry = {};
+  if (!this.focusedElement) {
+    return geometry;
+  }
+
+  if (this.focusedElement.contextMenu) {
+    const contextMenu = this.focusedElement.contextMenu;
+
+    geometry.nominal = {
+      x: Number(contextMenu.$x.val()),
+      y: Number(contextMenu.$y.val())
+    };
+
+    if (contextMenu.canResize) {
+      geometry.nominal.height = Number(contextMenu.$height.val()),
+      geometry.nominal.width = Number(contextMenu.$width.val())
+    }
+
+    if (contextMenu.canRotate) {
+      geometry.nominal.angle = Number(contextMenu.$angle.val())
+    }
+  }
+
+  if (this.focusedElement.size) {
+    geometry.computed = {
+      height: this.focusedElement.size.height,
+      width: this.focusedElement.size.width
+    }
+  }
+
+  return geometry;
+};
+
+/**
  * Clean up any event listeners
  */
 H5P.DragNBar.prototype.remove = function () {
