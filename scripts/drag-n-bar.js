@@ -1124,9 +1124,9 @@ H5P.DragNBar.prototype.updateCoordinates = function (left, top, x, y) {
 /**
  * Update dimensions of context menu.
  */
-H5P.DragNBar.prototype.updateDimensions = function (params) {
+H5P.DragNBar.prototype.updateDimensions = function () {
   if (this.focusedElement && this.focusedElement.contextMenu && this.focusedElement.contextMenu.canResize) {
-    this.focusedElement.contextMenu.updateDimensions(params);
+    this.focusedElement.contextMenu.updateDimensions();
   }
 };
 
