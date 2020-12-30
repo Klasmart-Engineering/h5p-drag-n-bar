@@ -1393,6 +1393,9 @@ H5P.DragNBar.prototype.fitToChild = function ($outer, useBrowserSize) {
     });
   }
 
+  // Editors may add outline to $outer that will be streched due to scaling
+  this.checkScaleDistortion();
+
   this.dnr.trigger('updatedTransform', innerTransformValues);
 }
 
@@ -1411,42 +1414,21 @@ H5P.DragNBar.prototype.getHullSize = function($element) {
 };
 
 /**
- * Get current element's geometry.
- * @return {object} Geometry.
+ * Check for scale distortion to be marked.
+ * @param {H5P.jQuery} [$element] Element to check.
  */
-H5P.DragNBar.prototype.getCurrentGeometry = function() {
-  const geometry = {};
-  if (!this.focusedElement) {
-    return geometry;
+H5P.DragNBar.prototype.checkScaleDistortion = function ($element) {
+  $element = $element || this.focusedElement.$element;
+  if ($element.length === 0) {
+    return;
   }
 
-  if (this.focusedElement.contextMenu) {
-    const contextMenu = this.focusedElement.contextMenu;
+  const $outer = $element.children().first();
+  const transformValues = this.getCSSTransformValues($outer);
 
-    geometry.nominal = {
-      x: Number(contextMenu.$x.val()),
-      y: Number(contextMenu.$y.val())
-    };
-
-    if (contextMenu.canResize) {
-      geometry.nominal.height = Number(contextMenu.$height.val()),
-      geometry.nominal.width = Number(contextMenu.$width.val())
-    }
-
-    if (contextMenu.canRotate) {
-      geometry.nominal.angle = Number(contextMenu.$angle.val())
-    }
-  }
-
-  if (this.focusedElement.size) {
-    geometry.computed = {
-      height: this.focusedElement.size.height,
-      width: this.focusedElement.size.width
-    }
-  }
-
-  return geometry;
-};
+  const scaleDistortion = transformValues.scale.x < 0.3 || transformValues.scale.x > 1.7 || transformValues.scale.y < 0.3 || transformValues.scale.y > 1.7;
+  $outer.toggleClass('h5p-scale-distortion', scaleDistortion);
+}
 
 /**
  * Clean up any event listeners
