@@ -159,11 +159,6 @@ H5P.DragNBarElement = (function ($, ContextMenu, EventDispatcher) {
       // Make $element fit its child that can be larger/smaller due to rotation
       this.dnb.fitToChild(this.$element, false);
 
-      // Editors may add outline to $outer that will be streched due to scaling
-      transformValues = this.dnb.getCSSTransformValues($outer);
-      const scaleDistortion = transformValues.scale.x < 0.3 || transformValues.scale.x > 1.7 || transformValues.scale.y < 0.3 || transformValues.scale.y > 1.7;
-      $outer.toggleClass('h5p-scale-distortion', scaleDistortion);
-
       this.dnb.updateCoordinates();
       this.dnb.updateDimensions();
     }
