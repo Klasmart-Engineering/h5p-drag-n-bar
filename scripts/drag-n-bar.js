@@ -1218,11 +1218,11 @@ H5P.DragNBar.fitElementInside = function (sizeNPosition) {
         style.width = sizeNPosition.width * factor.y;
       }
       else {
-        style.height = sizeNPosition.heigth * factor.x;
+        style.height = sizeNPosition.height * factor.x;
       }
     }
     else if (factor.x) {
-      style.height = sizeNPosition.heigth * factor.x;
+      style.height = sizeNPosition.height * factor.x;
     }
     else if (factor.y) {
       style.width = sizeNPosition.width * factor.y;
