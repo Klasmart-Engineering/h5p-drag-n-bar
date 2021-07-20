@@ -17,6 +17,9 @@ H5P.DragNBarContextMenu = (function ($, EventDispatcher) {
    *  - 'vertical'
    *  - 'horizontal'
    * @param {boolean} [disableRotate=true] Disable rotation.
+<<<<<<< HEAD
+=======
+>>>>>>> rebase-1.5.12
    */
   function ContextMenu($container, DragNBarElement, hasCoordinates, disableResize, disableCopy, directionLock, disableRotate) {
     var self = this;
