@@ -476,13 +476,15 @@
   content: "\f200";
 }
 .form-manager-icon-truefalse:before,
-.form-manager-icon-coursepresentation:before {
+.form-manager-icon-coursepresentation:before,
+.form-manager-icon-coursepresentationkid:before {
   font-family: 'H5PFontIcons';
 }
 .form-manager-icon-truefalse:before {
   content: "\e902";
 }
-.form-manager-icon-coursepresentation:before {
+.form-manager-icon-coursepresentation:before,
+.form-manager-icon-coursepresentationkid:before {
   content: "\e923";
 }
 
