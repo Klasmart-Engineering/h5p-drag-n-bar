@@ -8,6 +8,7 @@
     "unableToPaste": "نمی‌توان این شیء را پیست کرد. متأسفانه، شیئی که شما سعی می‌کنید پیست کنید، توسط این نوع محتوا یا این نسخه پشتیبانی نمی‌شود.",
     "sizeLabel": "اندازه",
     "positionLabel": "مکان",
+    "rotationLabel": "Rotation",
     "heightLabel": "ارتفاع",
     "widthLabel": "عرض",
     "copyLabel": "کپی",

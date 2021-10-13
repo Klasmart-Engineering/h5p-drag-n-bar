@@ -8,6 +8,7 @@
     "unableToPaste": "No es pot enganxar aquest objecte. Malauradament, l’objecte que esteu intentant enganxar no és compatible amb aquest tipus de contingut o versió.",
     "sizeLabel": "Mida",
     "positionLabel": "Posició",
+    "rotationLabel": "Rotation",
     "heightLabel": "Alçada",
     "widthLabel": "Amplada",
     "copyLabel": "Copia",
