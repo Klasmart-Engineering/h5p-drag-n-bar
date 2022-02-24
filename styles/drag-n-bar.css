@@ -3,6 +3,10 @@
   opacity: 0.6;
 }
 
+.h5peditor .h5p-dragnbar-element {
+  font-family: 'Roboto', sans-serif;
+}
+
 .h5peditor .h5p-dragnbar-element.focused,
 .h5peditor .h5p-dragnbar-element:hover {
   outline: 1px solid #0099ff;
@@ -38,7 +42,7 @@
   border-radius: 4px;
   background-color: rgba(0, 0, 0, 0.9);
   color: #fff;
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-size: 0.6em;
   line-height: 2em;
   content: attr(data-label);

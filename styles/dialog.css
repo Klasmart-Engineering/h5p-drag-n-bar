@@ -1,3 +1,7 @@
+.h5p-dialog {
+  font-family: 'Roboto', sans-serif;
+}
+
 .h5p-dialog-title:before {
   content: " ";
   font-family: 'H5PFontAwesome4';

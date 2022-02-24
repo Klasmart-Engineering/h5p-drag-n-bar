@@ -12,6 +12,7 @@
 
 .h5p-dragnbar-context-menu {
   display: block;
+  font-family: 'Roboto', sans-serif;
   background-color: #c4e3f7;
   height: 36px;
   margin-top: -51px;
@@ -198,6 +199,7 @@
 
 .ui-widget .h5p-dragnbar-coordinates > div > input,
 .h5p-dragnbar-coordinates input {
+  font-family: 'Roboto', sans-serif;
   font-size: 13px;
   background: none repeat scroll 0 0 transparent;
   border: medium none;
